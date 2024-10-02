@@ -1,0 +1,21 @@
+# Build only the JS shell - application or project?
+ac_add_options --enable-project=js
+
+# Enable the debugging tools: Assertions, debug only code etc.
+ac_add_options --disable-debug
+
+# Because SpiderMonkey embedding docs tells us so https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples/blob/esr102/docs/Building%20SpiderMonkey.md
+ac_add_options --disable-jemalloc
+
+# Enable optimizations as well so that the test suite runs much faster. If
+# you are having trouble using a debugger, you should disable optimization.
+ac_add_options --enable-optimize
+
+# From https://discourse.mozilla.org/t/embedding-spidermonkey-in-visual-studio/123974
+ac_add_options --with-intl-api
+ac_add_options --enable-strip
+ac_add_options --enable-install-strip
+
+# Use a dedicated objdir for SpiderMonkey debug builds to avoid
+# conflicting with Firefox build with default configuration.
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-optim-@CONFIG_GUESS@

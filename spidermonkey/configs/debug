@@ -1,0 +1,12 @@
+# Build only the JS shell
+ac_add_options --enable-project=js
+
+# Enable the debugging tools: Assertions, debug only code etc.
+ac_add_options --enable-debug
+
+# Because SpiderMonkey embedding docs tells us so https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples/blob/esr102/docs/Building%20SpiderMonkey.md
+ac_add_options --disable-jemalloc
+
+# Use a dedicated objdir for SpiderMonkey debug builds to avoid
+# conflicting with Firefox build with default configuration.
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-debug-@CONFIG_GUESS@
